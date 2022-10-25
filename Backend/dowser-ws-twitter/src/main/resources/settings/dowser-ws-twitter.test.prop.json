@@ -1,0 +1,81 @@
+{
+	"dowser.ws.twitter.es.hosts" :  [
+		{"cluster":"dowser","host":"xxx.ina.fr:xx"},
+		{"cluster":"dowser","host":"xxx.ina.fr:xx"},
+		{"cluster":"dowser","host":"xxx.ina.fr:xx"},
+		{"cluster":"dowser","host":"xxx.ina.fr:xx"},
+		{"cluster":"dowser","host":"xxx.ina.fr:xx"},
+		{"cluster":"dowser","host":"xxx.ina.fr:xx"},
+		{"cluster":"dowser","host":"xxx.ina.fr:xx"},
+		{"cluster":"dowser","host":"xxx.ina.fr:xx"},
+		{"cluster":"estimation","host":"xxx.ina.fr:xx"},
+		{"cluster":"estimation","host":"xxx.ina.fr:xx"},
+		{"cluster":"estimation","host":"xxx.ina.fr:xx"},
+		{"cluster":"estimation","host":"xxx.ina.fr:xx"},
+		{"cluster":"estimation","host":"xxx.ina.fr:xx"},
+		{"cluster":"estimation","host":"xxx.ina.fr:xx"},
+		{"cluster":"estimation","host":"xxx.ina.fr:xx"},
+		{"cluster":"estimation","host":"xxx.ina.fr:xx"}
+	],
+	
+
+	"dowser.ws.twitter.log.jersey" : false,
+	"log4j.file" : "/log4j.test.properties"	,
+	
+	
+	"dowser.ws.twitter.search.fields" : "text;full_text;hashtags;user.screen_name;user.name;user_mentions.screen_name;user_mentions.name;urls.expanded_url",
+	
+	"dowser.ws.twitter.entities" :
+	{
+		"hashtags" : "hashtags",
+        "mentions" : "user_mentions.screen_name",
+        "users"    : "user.screen_name",
+        "urls"	   : "urls.expanded_url",
+        "media"	   : "media.media_url",
+        "emojis"   : "emojis",
+        "retweet" :  "retweeted",
+        "quote" :  "quoted",
+        "lang" :  "lang",
+        "country": "place.country",
+        "city": "place.name.raw", 
+        "collection" : "collection",
+        "url" : "urls.host",
+        "expanded_url" : "urls.expanded_url",
+        "place_type" : "place.place_type",
+        "vuser" :"user.verified"
+	
+	},
+	
+	"dowser.ws.twitter.aggregations" :
+	{
+		"hashtags" : "hashtags",
+        "mentions" : "user_mentions.screen_name.raw",
+        "users"    : "user.screen_name.raw",
+        "urls"	   : "urls.expanded_url",
+        "media"	   : "media.media_url",
+        "emojis"   : "emojis",
+        "retweet" :  "retweeted",
+        "quote" :  "quoted",
+        "lang" :  "lang",
+        "country": "place.country.raw",
+        "city": "place.name.raw", 
+        "collection" : "collection.raw",
+        "url" : "urls.host",
+        "expanded_url" : "urls.expanded_url",
+        "place_type" : "place.place_type",
+        "vuser" :"user.verified"
+	
+	},
+	
+	"fr.ina.dlweb.tcpbridge" : {
+       "search_multi" : {
+           "type" : "multi", 
+           "url_base" : "localhost.ina.fr:8080",
+           "servers" : ["xx.fr:xx","xx.ina.fr:xx"],
+           "restartOnError" : true,
+           "restartDelay" : 10000,
+           "sendPingInterval" : 30000,
+           "receivePingTimeout" : 45000
+       }   
+	}
+}

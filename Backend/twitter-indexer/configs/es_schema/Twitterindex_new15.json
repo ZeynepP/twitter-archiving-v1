@@ -1,0 +1,206 @@
+{
+	"tweets" : {
+		"_source" : {"enabled" : true,"compress" : true},
+		"_all" : {"enabled" : false},
+		"_timestamp" : {"enabled" : true},
+		
+		"dynamic" : "strict",
+		
+	"properties":{
+	
+		  "id":  {"type" : "string", "index" : "not_analyzed", "store" : "no"},
+	
+		  "source_type" :  {"type" : "string", "index" : "not_analyzed", "store" : "no", "fielddata" : {"format" : "doc_values"}},
+		  "source_path" :  {"type" : "string", "index" : "not_analyzed", "store" : "no", "fielddata" : {"format" : "doc_values"}},
+		  "method_archive" :  {"type" : "string", "index" : "not_analyzed", "store" : "no", "fielddata" : {"format" : "doc_values"}},
+		  "archived_at": {"type" : "date", "format": "date_time_no_millis", "store" : "no", "fielddata" : {"format" : "doc_values"}},
+		  "indexed_at": {"type" : "date", "format": "date_time_no_millis", "store" : "no", "fielddata" : {"format" : "doc_values"}},
+		  
+		 
+		  
+		  "created_at": {"type" : "date", "format": "date_time_no_millis", "store" : "no", "fielddata" : {"format" : "doc_values"}},
+	      "text":  {"type" : "string", "index" : "analyzed", "analyzer" : "text_fr", "store" : "no", "null_value" : "null"},
+	      "full_text":  {"type" : "string", "index" : "analyzed", "analyzer" : "text_fr", "store" : "no", "null_value" : "null"},
+		  
+		  "timestamp_ms": {"type" : "long", "format": "date_time_no_millis", "store" : "no", "fielddata" : {"format" : "doc_values"}},
+		  "filter_level": {"type" : "string", "index" : "not_analyzed", "store" : "no", "null_value" : "", "fielddata" : {"format" : "doc_values"}}, 
+	      "retweeted": {"type" : "boolean", "store" : "no", "null_value" : "false", "fielddata" : {"format" : "doc_values"}}, 
+	      "quoted": {"type" : "boolean", "store" : "no", "null_value" : "false", "fielddata" : {"format" : "doc_values"}},
+	      "favorited": {"type" : "boolean", "store" : "no", "null_value" : "false", "fielddata" : {"format" : "doc_values"}}, 
+	      "lang": {"type" : "string", "index" : "not_analyzed", "store" : "no", "null_value" : "", "fielddata" : {"format" : "doc_values"}}, 
+	      "in_reply_to_status_id": {"type" : "string", "index" : "not_analyzed", "store" : "no", "fielddata" : {"format" : "doc_values"}},
+	      "in_reply_to_user_id": {"type" : "string", "index" : "not_analyzed", "store" : "no", "fielddata" : {"format" : "doc_values"}},
+	      "in_reply_to_screen_name": {"type" : "string", "index" : "analyzed", "analyzer" : "entity_twitter", "store" : "no", "null_value" : "null", "fields" : { "raw" : {"type" : "string", "index" : "not_analyzed"}} },
+		  "retweet_count":{"type" : "integer", "index" : "not_analyzed", "store" : "no","null_value" : 0}, 
+		  "favorite_count":{"type" : "integer", "index" : "not_analyzed", "store" : "no","null_value" : 0},
+	      "source": {"type" : "string", "index" : "not_analyzed", "store" : "no", "null_value" : "", "fielddata" : {"format" : "doc_values"}}, 
+		
+	      "retweeted_status" :{
+	    	  "type" : "object",
+				"properties" : {
+					"created_at": {"type" : "date", "format": "date_time_no_millis", "store" : "no", "fielddata" : {"format" : "doc_values"}},
+					"id":  {"type" : "string", "index" : "not_analyzed", "store" : "no"},
+					"user": {
+			        	"type" : "object",
+						"properties" : {
+					            "statuses_count": {"type" : "integer", "index" : "not_analyzed", "store" : "no","null_value" : 0, "fielddata" : {"format" : "doc_values"}}, 
+					            "followers_count":  {"type" : "integer", "index" : "not_analyzed", "store" : "no","null_value" : 0, "fielddata" : {"format" : "doc_values"}},   
+					            "listed_count":  {"type" : "integer", "index" : "not_analyzed", "store" : "no","null_value" : 0, "fielddata" : {"format" : "doc_values"}}, 
+					            "friends_count": {"type" : "integer", "index" : "not_analyzed", "store" : "no","null_value" : 0, "fielddata" : {"format" : "doc_values"}}, 
+					            "favourites_count": {"type" : "integer", "index" : "not_analyzed", "store" : "no","null_value" : 0, "fielddata" : {"format" : "doc_values"}}, 
+					            "created_at": {"type" : "date", "format": "date_time_no_millis", "store" : "no", "fielddata" : {"format" : "doc_values"}},
+					            "name": {"type" : "string", "index" : "analyzed", "analyzer" : "entity_twitter", "store" : "no", "null_value" : "null", "fields" : { "raw" : {"type" : "string", "index" : "not_analyzed"}}},
+					            "url": {"type" : "string", "index" : "not_analyzed", "store" : "no", "null_value" : "null"},
+					            "id": {"type" : "string", "index" : "not_analyzed", "store" : "no"},
+					            "profile_image_url": {"type" : "string", "index" : "not_analyzed", "store" : "no"} ,
+					            "description": {"type" : "string", "index" : "analyzed", "analyzer" : "text_fr", "store" : "no", "null_value" : "null"},
+					            "screen_name": {"type" : "string", "index" : "analyzed", "analyzer" : "entity_twitter", "store" : "no", "null_value" : "null", "fields" : { "raw" : {"type" : "string", "index" : "not_analyzed","fielddata" : {"format" : "doc_values"}}}},
+					            "location":  {"type" : "string", "index" : "not_analyzed", "store" : "no", "fielddata" : {"format" : "doc_values"},"fields" : { "raw" : {"type" : "string", "index" : "not_analyzed"}}}, 
+					            "lang": {"type" : "string", "index" : "not_analyzed", "store" : "no" , "fielddata" : {"format" : "doc_values"}}
+						      }
+						}
+	    	  
+					}
+	      
+	      },
+	      
+	    "quoted_status" :{
+	    	  "type" : "object",
+				"properties" : {
+					"created_at": {"type" : "date", "format": "date_time_no_millis", "store" : "no", "fielddata" : {"format" : "doc_values"}},
+					"id":  {"type" : "string", "index" : "not_analyzed", "store" : "no"},
+					"user": {
+			        	"type" : "object",
+						"properties" : {
+					            "statuses_count": {"type" : "integer", "index" : "not_analyzed", "store" : "no","null_value" : 0, "fielddata" : {"format" : "doc_values"}}, 
+					            "followers_count":  {"type" : "integer", "index" : "not_analyzed", "store" : "no","null_value" : 0, "fielddata" : {"format" : "doc_values"}},   
+					            "listed_count":  {"type" : "integer", "index" : "not_analyzed", "store" : "no","null_value" : 0, "fielddata" : {"format" : "doc_values"}}, 
+					            "friends_count": {"type" : "integer", "index" : "not_analyzed", "store" : "no","null_value" : 0, "fielddata" : {"format" : "doc_values"}}, 
+					            "favourites_count": {"type" : "integer", "index" : "not_analyzed", "store" : "no","null_value" : 0, "fielddata" : {"format" : "doc_values"}}, 
+					            "created_at": {"type" : "date", "format": "date_time_no_millis", "store" : "no", "fielddata" : {"format" : "doc_values"}},
+					            "name": {"type" : "string", "index" : "analyzed", "analyzer" : "entity_twitter", "store" : "no", "null_value" : "null", "fields" : { "raw" : {"type" : "string", "index" : "not_analyzed"}}},
+					            "url": {"type" : "string", "index" : "not_analyzed", "store" : "no", "null_value" : "null"},
+					            "id": {"type" : "string", "index" : "not_analyzed", "store" : "no"},
+					            "profile_image_url": {"type" : "string", "index" : "not_analyzed", "store" : "no"} ,
+					            "description": {"type" : "string", "index" : "analyzed", "analyzer" : "text_fr", "store" : "no", "null_value" : "null"},
+					            "screen_name": {"type" : "string", "index" : "analyzed", "analyzer" : "entity_twitter", "store" : "no", "null_value" : "null", "fields" : { "raw" : {"type" : "string", "index" : "not_analyzed","fielddata" : {"format" : "doc_values"}}}},
+					            "location":  {"type" : "string", "index" : "not_analyzed", "store" : "no", "fielddata" : {"format" : "doc_values"},"fields" : { "raw" : {"type" : "string", "index" : "not_analyzed"}}}, 
+					            "lang": {"type" : "string", "index" : "not_analyzed", "store" : "no" , "fielddata" : {"format" : "doc_values"}}
+						      }
+	    	  
+					}
+				}
+	      
+	      },
+	      		 
+		 "user": {
+	        	"type" : "object",
+				"properties" : {
+		            "statuses_count": {"type" : "integer", "index" : "not_analyzed", "store" : "no","null_value" : 0, "fielddata" : {"format" : "doc_values"}}, 
+		            "followers_count":  {"type" : "integer", "index" : "not_analyzed", "store" : "no","null_value" : 0, "fielddata" : {"format" : "doc_values"}},   
+		            "listed_count":  {"type" : "integer", "index" : "not_analyzed", "store" : "no","null_value" : 0, "fielddata" : {"format" : "doc_values"}}, 
+		            "friends_count": {"type" : "integer", "index" : "not_analyzed", "store" : "no","null_value" : 0, "fielddata" : {"format" : "doc_values"}}, 
+		            "favourites_count": {"type" : "integer", "index" : "not_analyzed", "store" : "no","null_value" : 0, "fielddata" : {"format" : "doc_values"}}, 
+		            "created_at": {"type" : "date", "format": "date_time_no_millis", "store" : "no", "fielddata" : {"format" : "doc_values"}},
+		            "name": {"type" : "string", "index" : "analyzed", "analyzer" : "entity_twitter", "store" : "no", "null_value" : "null", "fields" : { "raw" : {"type" : "string", "index" : "not_analyzed"}}},
+		            "url": {"type" : "string", "index" : "not_analyzed", "store" : "no", "null_value" : "null"},
+		            "id": {"type" : "string", "index" : "not_analyzed", "store" : "no"},
+		            "profile_image_url": {"type" : "string", "index" : "not_analyzed", "store" : "no"} ,
+		            "description": {"type" : "string", "index" : "analyzed", "analyzer" : "text_fr", "store" : "no", "null_value" : "null"},
+		            "screen_name": {"type" : "string", "index" : "analyzed", "analyzer" : "entity_twitter", "store" : "no", "null_value" : "null", "fields" : { "raw" : {"type" : "string", "index" : "not_analyzed","fielddata" : {"format" : "doc_values"}}}},
+		            "location":  {"type" : "string", "index" : "not_analyzed", "store" : "no", "fielddata" : {"format" : "doc_values"},"fields" : { "raw" : {"type" : "string", "index" : "not_analyzed"}}}, 
+		            "lang": {"type" : "string", "index" : "not_analyzed", "store" : "no" , "fielddata" : {"format" : "doc_values"}}
+			      }
+	      }, 
+	      
+	      "place": {
+	    	   "type" : "object",
+				"properties" : {
+						"country": {"type" : "string", "index" : "analyzed", "analyzer" : "entity_twitter", "store" : "no", "null_value" : "null", "fields" : { "raw" : {"type" : "string", "index" : "not_analyzed","fielddata" : {"format" : "doc_values"}}}}, 
+						"name": {"type" : "string", "index" : "analyzed", "analyzer" : "entity_twitter", "store" : "no", "null_value" : "null", "fields" : { "raw" : {"type" : "string", "index" : "not_analyzed","fielddata" : {"format" : "doc_values"}}}},
+						"place_type" : {"type" : "string", "index" : "not_analyzed", "store" : "no","null_value" : "null"},
+						"id": {"type" : "string", "index" : "not_analyzed", "store" : "no"},
+						"country_code": {"type" : "string", "index" : "not_analyzed", "store" : "no"}
+									
+						
+						}
+
+	      
+	      },
+	     
+		   "coordinates" :{
+		   		"type" : "object",
+				"properties" : {
+		   			"type" :{"type" : "string", "index" : "not_analyzed", "store" : "no"},
+		   			 "coordinates" : {"type" :"geo_point","index" : "not_analyzed", "store" : "no"}
+		   			 }
+		    },
+
+
+	      			
+           "user_mentions": {
+          			"type" : "object",
+              		"properties" : 
+              		{
+              			"name": {"type" : "string", "index" : "analyzed", "analyzer" : "entity_twitter", "store" : "no", "null_value" : "null", "fields" : { "raw" : {"type" : "string", "index" : "not_analyzed","fielddata" : {"format" : "doc_values"}} }},
+              			"screen_name": {"type" : "string", "index" : "analyzed", "analyzer" : "entity_twitter", "store" : "no", "null_value" : "null", "fields" : { "raw" : {"type" : "string", "index" : "not_analyzed","fielddata" : {"format" : "doc_values"}}}},
+                    	"id": {"type" : "string", "index" : "not_analyzed", "store" : "no"}  
+                    }
+
+          }, 
+		                  
+          "urls": {
+	           		"type" : "object",
+	          		"properties" : 
+	          		{
+	          			"url" : {"type" : "string", "index" : "not_analyzed", "store" : "no","fielddata" : {"format" : "doc_values"}} ,
+	          			"expanded_url" : {"type" : "string", "index" : "not_analyzed", "store" : "no","fielddata" : {"format" : "doc_values"}} , 
+	                	"host" : {"type" : "string", "index" : "not_analyzed", "store" : "no", "fielddata" : {"format" : "doc_values"}} 
+	          			
+	          		}  		 
+           	},
+   			"collection": {"type" : "string", "index" : "not_analyzed", "store" : "no", "null_value" : "", "fields" : { "raw" : {"type" : "string", "index" : "not_analyzed","fielddata" : {"format" : "doc_values"}}}},
+            "hashtags": {"type" : "string", "index" : "analyzed", "analyzer" : "entity_twitter", "store" : "no", "null_value" : "null", "fields" : { "raw" : {"type" : "string", "index" : "not_analyzed","fielddata" : {"format" : "doc_values"}}}},
+            "emojis": {"type" : "string", "index" : "not_analyzed", "store" : "no", "null_value" : "null", "fielddata" : {"format" : "doc_values"}},
+            "symbols": {"type" : "string", "index" : "analyzed", "analyzer" : "entity_twitter", "store" : "no", "null_value" : "null", "fields" : { "raw" : {"type" : "string", "index" : "not_analyzed","fielddata" : {"format" : "doc_values"}} }},
+   
+            "media":{
+            	
+            	"type" : "object",
+            	"properties" : {
+            		"host" : {"type" : "string", "index" : "not_analyzed", "store" : "no", "fielddata" : {"format" : "doc_values"}}  ,
+                	"media_url" : {"type" : "string", "index" : "not_analyzed", "store" : "no","fielddata" : {"format" : "doc_values"}} , 
+            		"expanded_url" : {"type" : "string", "index" : "not_analyzed", "store" : "no","fielddata" : {"format" : "doc_values"}} , 
+            		"type" : {"type" : "string", "index" : "not_analyzed", "store" : "no", "fielddata" : {"format" : "doc_values"}} , 
+            		"id" : {"type" : "string", "index" : "not_analyzed", "store" : "no"} ,
+            		
+            		"video_info":
+            		{
+            			"type" : "object",
+		          		"properties" : 
+		          		{
+		          			"aspect_ratio":{"type" : "string", "index" : "not_analyzed", "store" : "no"},
+		            		"duration_millis" : {"type" : "long", "index" : "not_analyzed", "store" : "no" ,"fielddata" : {"format" : "doc_values"}}  , 
+		            		"variants":{
+			           				"type" : "object",
+			          				"properties" : 
+					          		{
+					          			 "url" : {"type" : "string", "index" : "not_analyzed", "store" : "no"} , 
+					                	 "content_type" : {"type" : "string", "index" : "not_analyzed", "store" : "no", "fielddata" : {"format" : "doc_values"}}, 
+					          			 "bitrate" : {"type" : "integer", "index" : "not_analyzed", "store" : "no"} 
+					          		}  		 
+		           				}
+	           				}
+	           		}
+            	}
+            }
+	      		
+		                        
+	      
+
+	     
+        }
+     }
+	
+  
+}

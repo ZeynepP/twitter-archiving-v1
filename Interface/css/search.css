@@ -1,0 +1,173 @@
+/*
+	green:	#99CC00 / #6A8C00
+	blue:	#00BDD3 / #0096A7
+*/
+
+#site-popup {
+	height: auto;
+	padding: 0.4em;
+	position: relative;
+	text-align: left;
+	z-index: 1;
+	position: absolute;
+	display: block;
+}
+
+div.banner {
+	background: rgb(153, 204, 1);
+	margin-top: 20px;
+	padding-top: 8px;
+	padding-bottom: 28px;
+	padding-left: 10px;
+	padding-right: 10px;
+	text-align: left;
+	color: white;
+	font-family: arial,sans-serif;
+	font-size: 16px;
+}
+
+div.info-warning {
+	font-weight: bold;
+	margin-bottom: 30px;
+}
+
+div.info-error {
+	font-weight: bold;
+	margin-bottom: 30px;
+}
+
+div.timeline {
+	width: 1150px;
+	height: 280px;
+	margin-bottom: 30px;
+}
+
+div.timeline-checkbox {
+	text-align: right;
+	font-size: 14px;
+	color: #6A8C00;
+	font-family: arial,sans-serif;
+	margin-right: 50px;
+}
+
+div.hits {
+	margin-left: 50px;
+	width: 950px;
+	margin-bottom: 40px;
+	display: block;
+
+	
+}
+
+div.hit {
+/*	border-style: solid;
+	border-width: 1px;
+	border-color: rgb(200, 200, 200);*/
+	margin-top: 30px;
+
+	text-align: justify;
+	font-family: arial,sans-serif;
+}
+
+
+
+div.hit-textual {
+	width : 700px;
+	min-height : 100px;
+}
+
+div.hit-thumb {
+	width: 200px;
+	height: 100px;
+	padding: 10px;
+	display: inline-block;
+	float: right;
+	margin-left: 20px;
+	position: relative;	
+}
+
+div.hit-thumb > img {
+	max-width: 190px;
+	max-height: 90px;
+	border: 1px solid grey;
+	box-shadow: 4px 4px 2px #CCCCCC;
+    padding: 5px;/*
+	position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;*/
+	
+}
+
+div.hit-title {
+	padding-bottom: 2px;
+	word-wrap: normal;
+	/*width: 700px;
+	overflow: hidden;*/
+}
+
+a.hit-title {
+	font-size: 18px;
+	font-weight: bold;
+	color: #0096A7;
+}
+
+div.hit-url {
+	padding-bottom: 1px;
+	font-size: 14px;
+	color: #6A8C00;
+	word-wrap: normal;
+}
+
+div.hit-date {
+	padding-bottom: 1px;
+	font-size: 13px;
+	/*color: #6A8C00;*/
+	color: #0096A7;
+	word-wrap: normal;
+}
+
+div.hit-text {
+	font-size: 13px;
+	color: #7C777D;
+}
+
+span.hit-highlighting {
+	font-weight: bold;
+}
+
+span.hit-ellipsis {
+	color: #99CC00;
+	font-size: 11px;
+	font-weight: bold;
+}
+
+div.hit-expand {
+}
+
+a.hit-expand {
+	margin-left: 10px;
+	font-size: 14px;
+	color: #0096A7;
+}
+
+
+
+span.page {
+	color: white;
+	margin-left: 10px;
+	margin-rigth: 10px;
+}
+
+span.page-former {
+	text-decoration: underline;
+}
+
+span.page-next {
+	text-decoration: underline;
+}
+
+span.page-current {
+	font-weight: bold;
+}

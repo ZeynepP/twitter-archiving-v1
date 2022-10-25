@@ -1,0 +1,41 @@
+{
+	"elastic":
+	{
+		"source_hosts" : ["http://xx.ina.fr:xx"],
+		"source_index" : "twitter_estimations_min",
+		"target_hosts" : ["http://xx.ina.fr:xx"],
+		"target_index": "twitter_estimations_min",
+		
+		"restore_repository_name" : "twitter_xxx"
+		
+	},
+	
+	"repository":
+	{
+		"type" : "hdfs",
+		"settings" : {
+			"uri" : "hdfs://xxx.ina.fr:xx",
+			"path" : "/user/elastic/twitter_xxx/snapshots",
+			"conf_location" : "/etc/hadoop/conf/core-site.xml,/etc/hadoop/conf/hdfs-site.xml",
+			"max_restore_bytes_per_sec" : "20mb",
+			"max_snapshot_bytes_per_sec" : "20mb"    
+		}
+		
+	},
+	
+	"snapshot":
+	{  
+		  "ignore_unavailable": true,   
+		  "include_global_state": false
+	},
+	
+	"restore":
+	{ 
+		"ignore_unavailable": true,   
+		"include_global_state": false
+
+	}
+	
+
+
+}

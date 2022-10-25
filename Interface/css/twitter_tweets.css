@@ -1,0 +1,267 @@
+@CHARSET "ISO-8859-1";
+
+			img.emoji {
+			   height: 1.5em;
+			   width: 1.5em;
+			   margin: 0 .05em 0 .1em;
+			   vertical-align: -0.1em;
+			}
+            @font-face {
+                font-family: 'proxima_nova_rgregular';
+                src: url('https://litmus.com/fonts/Emails/proximanova-regular-webfont.eot');
+                src: url('https://litmus.com/fonts/Emails/proximanova-regular-webfont.eot?#iefix') format('embedded-opentype'),
+                     url('https://litmus.com/fonts/Emails/proximanova-regular-webfont.woff') format('woff'),
+                     url('https://litmus.com/fonts/Emails/proximanova-regular-webfont.ttf') format('truetype'),
+                     url('https://litmus.com/fonts/Emails/proximanova-regular-webfont.svg#proxima_nova_rgregular') format('svg');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: 'proxima_nova_rgbold';
+                src: url('https://litmus.com/fonts/Emails/proximanova-bold-webfont.eot');
+                src: url('https://litmus.com/fonts/Emails/proximanova-bold-webfont.eot?#iefix') format('embedded-opentype'),
+                     url('https://litmus.com/fonts/Emails/proximanova-bold-webfont.woff') format('woff'),
+                     url('https://litmus.com/fonts/Emails/proximanova-bold-webfont.ttf') format('truetype'),
+                     url('https://litmus.com/fonts/Emails/proximanova-bold-webfont.svg#proxima_nova_rgbold') format('svg');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: 'futura_md_btbold';
+                src: url('https://litmus.com/fonts/Emails/futura_bold_bt-webfont.eot');
+                src: url('https://litmus.com/fonts/Emails/futura_bold_bt-webfont.eot?#iefix') format('embedded-opentype'),
+                     url('https://litmus.com/fonts/Emails/futura_bold_bt-webfont.woff2') format('woff2'),
+                     url('https://litmus.com/fonts/Emails/futura_bold_bt-webfont.woff') format('woff'),
+                     url('https://litmus.com/fonts/Emails/futura_bold_bt-webfont.ttf') format('truetype'),
+                     url('https://litmus.com/fonts/Emails/futura_bold_bt-webfont.svg#futura_md_btbold') format('svg');
+                font-weight: normal;
+                font-style: normal;
+
+            }
+
+            @font-face {
+                font-family: 'futura_bk_btbook';
+                src: url('https://litmus.com/fonts/Emails/futura_book_bt-webfont.eot');
+                src: url('https://litmus.com/fonts/Emails/futura_book_bt-webfont.eot?#iefix') format('embedded-opentype'),
+                     url('https://litmus.com/fonts/Emails/futura_book_bt-webfont.woff2') format('woff2'),
+                     url('https://litmus.com/fonts/Emails/futura_book_bt-webfont.woff') format('woff'),
+                     url('https://litmus.com/fonts/Emails/futura_book_bt-webfont.ttf') format('truetype'),
+                     url('https://litmus.com/fonts/Emails/futura_book_bt-webfont.svg#futura_bk_btbook') format('svg');
+                font-weight: normal;
+                font-style: normal;
+
+            }
+
+            @font-face {
+                font-family: 'tisaprobold';
+                src: url('https://litmus.com/fonts/Emails/tisapro-bold-webfont.eot');
+                src: url('https://litmus.com/fonts/Emails/tisapro-bold-webfont.eot?#iefix') format('embedded-opentype'),
+                     url('https://litmus.com/fonts/Emails/tisapro-bold-webfont.woff2') format('woff2'),
+                     url('https://litmus.com/fonts/Emails/tisapro-bold-webfont.woff') format('woff'),
+                     url('https://litmus.com/fonts/Emails/tisapro-bold-webfont.ttf') format('truetype'),
+                     url('https://litmus.com/fonts/Emails/tisapro-bold-webfont.svg#tisaprobold') format('svg');
+                font-weight: normal;
+                font-style: normal;
+
+            }
+
+            @font-face {
+                font-family: 'tisaproregular';
+                src: url('https://litmus.com/fonts/Emails/tisapro-regular-webfont.eot');
+                src: url('https://litmus.com/fonts/Emails/tisapro-regular-webfont.eot?#iefix') format('embedded-opentype'),
+                     url('https://litmus.com/fonts/Emails/tisapro-regular-webfont.woff2') format('woff2'),
+                     url('https://litmus.com/fonts/Emails/tisapro-regular-webfont.woff') format('woff'),
+                     url('https://litmus.com/fonts/Emails/tisapro-regular-webfont.ttf') format('truetype'),
+                     url('https://litmus.com/fonts/Emails/tisapro-regular-webfont.svg#tisaproregular') format('svg');
+                font-weight: normal;
+                font-style: normal;
+
+            }
+
+        
+            
+        .logo-pad-top {
+            padding-top: 18% !important;
+        }
+
+        .cta::before {
+            content: url('http://pages.litmus.com/l/31032/2015-05-20/2v416m/31032/60050/twitter_bg1.png');
+            margin-right: 8px;
+        }
+
+        .cta:hover {
+            border: 3px solid #7fbbc0 !important;
+        }
+
+        .bg {
+            border: none !important;
+            background-position: bottom !important;
+        }
+            
+       
+        .ExternalClass .ecxbg {
+            background-color: #e74c3c;
+            height: 330px !important;
+            min-height: 330px !important;
+            max-height: 330px !important;
+        }
+
+        .ExternalClass .ecxlogo-pad-top {
+            padding: 50px 0 !important;
+        }
+            
+      
+
+       
+		.webkit-hide {
+			display: none;
+		}
+
+		#font-weight-normal {
+			font-weight: normal !important;
+		}
+
+		.headline-pad {
+			padding-top: 0px !important;
+		}
+
+		.wrapper_twitter {
+			position: relative;
+			height: 600px;
+			overflow: hidden;
+		}
+
+		.wrapper_twitter::after {
+			bottom: 0px;
+			content: "";
+			display: block;
+			position: absolute;
+			width: 100%;
+			left: 0;
+			height: 30px;
+			z-index: 10;
+		}
+
+		.tweet_ext {
+			background-color: #ffffff;
+			width: 600px;
+			border-radius: 4px;
+			padding: 20px;
+			margin: 5px auto;
+			display: table;
+			border: 2px solid #8FCA06;
+			position: relative;
+			box-sizing: border-box;
+		}
+		
+		.tweet_ina {
+			background-color: #ffffff;
+			width: 600px;
+			border-radius: 4px;
+			padding: 20px;
+			margin: 5px auto;
+			display: table;
+			border: 2px solid #00BDD3;
+			position: relative;
+			box-sizing: border-box;
+		}
+
+		.slide {
+			margin-top: -100%;
+			opacity: 0;
+			-webkit-animation: slide 2s ease-in-out forwards, appear 3s ease-in-out forwards;
+		}
+
+		.tweet-container { 
+		  background-color: #ffffff;
+		  overflow: hidden;
+		  position: inline-block;
+		  min-height: 100px;
+		}
+
+		.tweet:hover {
+			cursor: pointer;
+			border-color: #7fbbc0;
+		}
+
+		.tweet-avatar-wrapper {
+			width: 70px;
+			float: left;
+		}
+
+
+		.center-cropped {
+		  width: 490px;
+		  
+		  background-position: center center;
+		  background-repeat: no-repeat;
+		}
+		
+		.avatar {
+			width: 48px;
+			height: 48px;
+			border-radius: 5px;
+			margin-top: 5px;
+			background-size: cover !important;
+			float: left;
+		}
+		
+		.tweet-wrapper {
+			width: 490px;
+			float: left;
+			table-layout: fixed; 
+			
+		}
+
+		.name {
+			font-weight: bold;
+			color: #111111;
+			display: inline-block;
+			
+			
+		}
+
+		.handle {
+			color: #7fbbc0;
+			display: inline-block;
+			margin-left: 3px;
+			
+		}
+		.timestamp {
+			color: #999999;
+			margin-left: 3px;
+			display: inline-block;
+			
+		}
+
+		.copy {
+			color: #000000;
+			margin-top: 10px;
+			display:block;
+			
+		}
+	
+
+		.timestamp::before {
+			content: '\2022';
+			margin-right: 5px;
+		}
+
+		.name, .handle, .copy, .timestamp {
+			font-family: Helvetica, Arial, sans-serif;
+			font-size: 15px;
+			line-height: 18px;
+			
+			
+		}
+		
+		.hash_tag{
+			color: #0084b4;
+			font-family: Helvetica, Arial, sans-serif;
+			font-size: 15px;
+			line-height: 18px;
+		}
+
+       

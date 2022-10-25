@@ -1,0 +1,12 @@
+{
+		"twitter_data" : "file:/D://Documents//Twitter//test//collections;file:/D://Documents//Twitter//test//streaming",
+		"offset_file" : "D://Documents//Twitter//test//trends_infofiles.offset",
+		"from_scratch" : false,
+		"mapping" : {
+			"giletsjaunes" : {"collection" : "dlweb", "archive_method" : "trends" , "source_origin" : "ina"},
+			"/test/streaming" : {"collection" : "dlweb", "archive_method" : "streaming" , "source_origin" : "ina"}
+		}
+		
+		
+
+}

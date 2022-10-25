@@ -1,0 +1,40 @@
+{
+	
+	"source" : { 
+	
+			"file" : "elections2017.jsons",
+			"check_interval_second" : 10
+	},
+	
+	
+	
+	"save" : {
+			"current_folder" : "/test",
+			"done_folder" : "/test_done",
+			"error_folder" : "/test_error",
+			"max_record_by_file":10,
+			"offset_file":"test.offset"
+	},
+	
+	"crawler_info" :
+	{
+	
+		"application_name":"twitter_test",
+		"collection": "dlweb",
+		"source_origin":"ina"
+	},
+	
+	
+	
+	"twitter_credentials":"keys.json",
+	"twitter_credentials_name":"twitter_test",
+	
+	
+	"settings": 
+	{
+		"proxy_host":"xxx.fr",
+		"proxy_port":"81",
+		"keep_info_file_for_jsons":"true"	,
+		"log4jproperties" : "log4j_test.properties"
+	}
+}

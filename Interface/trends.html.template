@@ -1,0 +1,170 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Twitter DLWeb</title>
+
+		<link rel="stylesheet" type="text/css" href="[[URL_FRONT]]home.dlweb/style/ina.css" />
+		<link rel="stylesheet" type="text/css" href="[[LINK_BASE]]/css/search.css"/> 
+		<link rel="stylesheet" type="text/css" href="[[LINK_BASE]]/css/twitter_layout.css"/> 
+		<link rel="stylesheet" type="text/css" href="[[LINK_BASE]]/css/jquery-ui.css"/>
+		<link rel="stylesheet" type="text/css" href="[[LINK_BASE]]/css/twitter.css"/>	
+		<!-- working on data tables style -->	
+		<link rel="stylesheet" type="text/css" href="[[LINK_BASE]]/css/buttons.dataTables.css"> 
+		<link rel="stylesheet" type="text/css" href="[[LINK_BASE]]/css/jquery.dataTables.css"> 
+		<link rel="stylesheet" type="text/css" href="[[LINK_BASE]]/css/twitter_tweets.css"/> 
+
+<!--  FF3.5 compability js  -->
+
+		<script src="[[LINK_BASE]]/js/console-shim.js"></script>
+		<script src="[[LINK_BASE]]/js/es5-shim.js"></script>
+		<script src="[[LINK_BASE]]/js/es5-sham.js"></script>
+ 		
+
+<!--  Dowser basic js  -->
+
+	    <script src="[[LINK_BASE]]/js/jquery-1.10.0.min.js"></script>
+		<script src="[[LINK_BASE]]/js/jquery-ui.min.js"></script>		
+		<script src="[[LINK_BASE]]/js/form.js"></script>
+		<script src="[[LINK_BASE]]/js/jstz.min.js"></script>
+
+
+<!--  Datatable + utils  js  -->	
+
+		<script src="[[LINK_BASE]]/js/jquery.dataTables.js"></script>
+		<script src="[[LINK_BASE]]/js/dataTables.buttons.min.js"></script>
+		<script src="[[LINK_BASE]]/js/buttons.colVis.min.js"></script>
+		<script src="[[LINK_BASE]]/js/bundle.js"></script>
+		<script src="[[LINK_BASE]]/js/Blob.js"></script>
+		<script src="[[LINK_BASE]]/js/FileSaver.js"></script>
+		
+		
+	
+<!--  wordcloud   js  -->		
+		<script src="[[LINK_BASE]]/js/gexf/d3.v3.min.js"></script>
+		<script src="[[LINK_BASE]]/js/gexf/d3.layout.cloud.js"></script>
+		<script src="[[LINK_BASE]]/js/gexf/d3.wordcloud.js"></script>
+		
+<!--  highcharts highstocks and export   js  -->	
+		<script src="[[LINK_BASE]]/js/highcharts/highstock.js"></script>
+		<script src="[[LINK_BASE]]/js/highcharts/highcharts.js"></script>
+		<script src="[[LINK_BASE]]/js/highcharts/exporting.js"></script>
+
+		<script src="[[LINK_BASE]]/js/highcharts/export-csv.js"></script>
+		
+
+
+	
+	
+<script>
+/**
+ * http://usejsdoc.org/
+ */
+
+				var basews = "[[LINK_BASE]]";	
+				var index = "twitter_trends";
+				var timelinebysource = true;//[[SEPERATE_SOURCES]];
+				var displaysourcediv = "none"
+				if(timelinebysource) displaysourcediv = "block"
+				var exportenabled = true;
+				var nAgt = navigator.userAgent;
+				console.log(nAgt);
+				var highmargin = -1;
+				
+				if ((verOffset=nAgt.indexOf("Firefox"))!=-1) {
+					 browserName = "Firefox";
+					 fullVersion = nAgt.substring(verOffset+8);
+					
+					 if(fullVersion.indexOf("3.5")!=-1)
+					 {
+						exportenabled = false;
+						highmargin=5;
+						
+					 }
+				}
+				var colors = ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'];
+				Highcharts.setOptions({
+				    colors: colors,
+					global: {
+						useUTC: false
+				
+					},
+				    lang: {
+						months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',  'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+						rangeSelectorFrom: "De",
+						rangeSelectorTo: "à",
+						rangeSelectorZoom: "Zoom",
+						weekdays: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+						exportButtonTitle: "Exporter",
+			
+						downloadPNG: 'Télécharger en PNG',
+						downloadJPEG: 'Télécharger en JPEG',
+						downloadPDF: 'Télécharger en PDF',
+						downloadSVG: 'Télécharger en SVG',
+						downloadCSV: 'Télécharger en CSV',
+						downloadXLS: 'Télécharger en XLS',
+						printChart:""
+					}
+        
+				});
+				
+			    Highcharts.getOptions().exporting.buttons.contextButton.menuItems.splice(8);
+		
+		
+	
+</script>
+
+<!--  Twitter basic js  -->
+
+		<script src="[[LINK_BASE]]/js/twitter/twitterStateManager.js"></script>
+		<script src="[[LINK_BASE]]/js/twitter/twitterTrendsDataTable.js"></script>
+ 		<script src="[[LINK_BASE]]/js/twitter/twitterUtils.js"></script>
+		<script src="[[LINK_BASE]]/js/twitter/twitterTrends.js"></script>
+		
+<!--  Twitter specific js over -->	
+
+</head>
+
+
+
+<body>
+<div id="all">
+	<div style="margin-left: 30px; margin-top: 30px; width:1040px;">
+			<form id='searchform'>
+					<div class="form-group">
+						<input  name="query"   title="query"  class="inputFieldsmall"  style="width:250;"  />							      
+						<input type="submit" value="chercher" class="submitButton">    
+						
+				  		<div style="height:9px;"></div>
+						<label for="dates" class="col-sm-1 labelina" >à &nbsp;&nbsp;</label>								    	
+					    <input type="text" name="from_date" class="inputFieldxs" id="date"  > 
+	 
+				 	</div> 			   
+
+			</form>
+	</div>
+
+
+	
+	
+	<div id="container_trends_timeline" class="labelina" style="width:98%;height=50px"></div>
+
+
+	<div class="banner" id="resultsbanner">
+		Recherche de tweets, veuillez préciser vos critéres de recherche.
+	</div>
+		
+	
+<div id="content" style="min-height:300px;margin-left:30px; margin-right:20px;"  >
+			<div  id="tweets_list">
+	        	<div id="colvis"></div>
+	            <table id='tweetsTrendsTable' class="cell-border table" style="border-collapse:collapse"></table>
+	
+	        </div>	
+
+	
+</div>
+</div>	
+
+</body>
+
+</html>

@@ -1,0 +1,591 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Twitter DLWeb</title>
+
+		<link rel="stylesheet" type="text/css" href="[[URL_FRONT]]home.dlweb/style/ina.css" />
+		<link rel="stylesheet" type="text/css" href="[[URL_FRONT]]dlweb.dlweb/css/font-awesome.css" />
+		<link rel="stylesheet" type="text/css" href="[[LINK_BASE]]/css/search.css"/> 
+		<link rel="stylesheet" type="text/css" href="[[LINK_BASE]]/css/twitter_layout.css"/> 
+		<link rel="stylesheet" type="text/css" href="[[LINK_BASE]]/css/jquery-ui.css"/>
+		<link rel="stylesheet" type="text/css" href="[[LINK_BASE]]/css/twitter.css"/>	
+		<!-- working on data tables style -->	
+		<link rel="stylesheet" type="text/css" href="[[LINK_BASE]]/css/buttons.dataTables.css"> 
+		<link rel="stylesheet" type="text/css" href="[[LINK_BASE]]/css/jquery.dataTables.css"> 
+		<link rel="stylesheet" type="text/css" href="[[LINK_BASE]]/css/twitter_tweets.css"/> 
+		<link rel="stylesheet" type="text/css" href="[[LINK_BASE]]/css/select2.css"/> 
+
+<!--  FF3.5 compability js  -->
+
+		<script src="[[LINK_BASE]]/js/console-shim.js"></script>
+		<script src="[[LINK_BASE]]/js/es5-shim.js"></script>
+		<script src="[[LINK_BASE]]/js/es5-sham.js"></script>
+ 		
+
+<!--  Dowser basic js  -->
+
+	    <script src="[[LINK_BASE]]/js/jquery-1.10.0.min.js"></script>
+		<script src="[[LINK_BASE]]/js/jquery-ui.min.js"></script>		
+		<script src="[[LINK_BASE]]/js/form.js"></script>
+		<script src="[[LINK_BASE]]/js/jstz.min.js"></script>
+
+
+<!--  Datatable + utils  js  -->	
+
+		<script src="[[LINK_BASE]]/js/jquery.dataTables.js"></script>
+				<script src="[[LINK_BASE]]/js/buttons.colVis.min.js"></script>
+		<script src="[[LINK_BASE]]/js/dataTables.buttons.min.js"></script>
+		<!-- to add export csv to wordcloud datatable -->
+		<script src="[[LINK_BASE]]/js/buttons.flash.min.js"></script>
+		<script src="[[LINK_BASE]]/js/bundle.js"></script>
+		<script src="[[LINK_BASE]]/js/Blob.js"></script>
+		<script src="[[LINK_BASE]]/js/FileSaver.js"></script>
+		
+		
+	
+<!--  wordcloud   js  -->		
+		<script src="[[LINK_BASE]]/js/gexf/d3.v3.min.js"></script>
+		<script src="[[LINK_BASE]]/js/gexf/d3.layout.cloud.js"></script>
+		<script src="[[LINK_BASE]]/js/gexf/d3.wordcloud.js"></script>
+		
+<!--  highcharts highstocks and expor js  export-csv is a highcharts plugin to export in csv  only highstocks is enough unless error  <script src="[[LINK_BASE]]/js/highcharts/highcharts.js"></script>-->	
+		<script src="[[LINK_BASE]]/js/highcharts/highstock.js"></script>
+
+		<script src="[[LINK_BASE]]/js/highcharts/exporting.js"></script>
+		<script src="[[LINK_BASE]]/js/highcharts/offline-exporting.js"></script>
+		<script src="[[LINK_BASE]]/js/highcharts/export-csv.js"></script>
+		
+		
+
+	
+	
+<script>
+/**
+ * http://usejsdoc.org/
+ */
+				var totalresults = 0;
+				var basews = "[[LINK_BASE]]";	
+				var index = "twitter_search_05";
+				var timelinebysource = false;//[[SEPERATE_SOURCES]];
+				var displaysourcediv = "none"
+				if(timelinebysource) displaysourcediv = "block"
+				var exportenabled = true;
+				var nAgt = navigator.userAgent;
+				console.log(nAgt);
+				var highmargin = -1;
+				
+				if ((verOffset=nAgt.indexOf("Firefox"))!=-1) {
+					 browserName = "Firefox";
+					 fullVersion = nAgt.substring(verOffset+8);
+					
+					 if(fullVersion.indexOf("3.5")!=-1)
+					 {
+						exportenabled = false; // why I do not remember
+						highmargin=5;
+						
+					 }
+				}
+				var colors = ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'];
+				Highcharts.setOptions({
+				    colors: colors,
+					global: {
+						useUTC: false
+				
+					},
+				    lang: {
+						months: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin',  'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+						rangeSelectorFrom: "De",
+						rangeSelectorTo: "à",
+						rangeSelectorZoom: "Zoom",
+						weekdays: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+						exportButtonTitle: "Exporter",
+			
+						downloadPNG: 'Télécharger en PNG',
+						downloadJPEG: 'Télécharger en JPEG',
+						downloadPDF: 'Télécharger en PDF',
+						downloadSVG: 'Télécharger en SVG',
+						downloadCSV: 'Télécharger en CSV',
+						downloadXLS: 'Télécharger en XLS',
+						printChart:""
+					}
+        
+				});
+				
+			    Highcharts.getOptions().exporting.buttons.contextButton.menuItems.splice(7);
+		
+		
+	
+</script>
+
+<!--  Twitter basic js  -->
+
+		<script src="[[LINK_BASE]]/js/twitter/twemoji.min.js?2.1.2"></script>
+		<script src="[[LINK_BASE]]/js/twitter/twitterStateManager.js"></script>
+		<script src="[[LINK_BASE]]/js/twitter/twitterAnalyzeDataTable.js"></script>
+		<script src="[[LINK_BASE]]/js/twitter/twitterMainDataTable.js"></script>
+		<script src="[[LINK_BASE]]/js/twitter/twitterMining.js"></script>
+		<script src="[[LINK_BASE]]/js/twitter/twitterTimeline.js"></script>
+ 		<script src="[[LINK_BASE]]/js/twitter/twitterUtils.js"></script>
+		<script src="[[LINK_BASE]]/js/twitter/twitter.js"></script>
+		<script src="[[LINK_BASE]]/js/select2.full.js"></script>
+<!--  Twitter specific js over -->	
+
+</head>
+
+
+
+<body>
+<div id="all">
+	<div style="margin-left: 30px; margin-top: 30px; width:1040px;">
+			<form id='searchform'>
+					<div class="form-group">
+						<input maxlength=2048 name="query"   title="query"  class="inputField" style="width:837;"  />							      
+						<input type="submit" value="chercher" class="submitButton">    
+						<a href="[[URL_FRONT]]home.dlweb/guide.html#twitter" class="questionIcon"></a>
+				  		<div style="height:9px;"></div>
+						<label for="dates" class="col-sm-1 labelina" >Entre le &nbsp;&nbsp;</label>								    	
+					    <input type="text" name="from_date" class="inputFieldxs" id="from_date" value="01-01-2014" > 
+						<label for="dates2 " class="labelina">&nbsp;&nbsp;et &nbsp;le &nbsp;&nbsp;</label>
+						<input type="text" name="to_date" class="inputFieldxs"  id="to_date"  >
+						<input type="submit" value="Options avanc&eacute;es" class="moreoptionsButton" onclick="$('#detailed_twitter').toggle();return false;">
+	 
+				 	</div> 			   
+							   
+					 <!--   style="display:none;" -->
+						<div id="detailed_twitter" style="display:none;" >
+						<!-- timeline aggregation granulatiy 
+							<div class="form-group">
+								<label for="hashtags" class="col-sm-1 labelina"></label>
+									<select class="inputFieldsmall"  name="interval"    required>
+										    	<option  value="null">Type d'aggregation pour timelines</option>
+											    <option   value="year">Année</option>
+											    <option   value="month">Mois</option>
+											    <option   value="day">Jour</option>
+												<option   value="hour">Heure</option>
+												<option   value="minute">Minute</option>
+												<option   value="second">Seconde</option>
+									</select>
+						    </div>-->
+
+							<!-- hashtags -->
+							  <div class="form-group">
+									<label for="collection" class="col-sm-1 labelina">Collections</label>
+									<select  name="collection" class="inputFieldsmall js-example-basic-multiple " multiple="multiple" >
+										<option value="dlweb" selected>Médiasphère</option>
+										<option value="attentats" selected>Attentats </option>
+										<option value="elections2017" selected>Elections 2017</option>
+										<option value="trends">Trends</option>
+									</select>
+
+				
+							 </div> 
+							<!-- hashtags -->
+							  <div class="form-group">
+									<label for="hashtags" class="col-sm-1 labelina">#Hashtags</label>
+									<input type="text" name="hashtags" class="inputFieldsmall" id="inputhashtags" placeholder="Filtrer par hashtags">
+							 </div> 
+							  <!-- mentions -->
+							  <div class="form-group">
+								    <label for="mentions" class="col-sm-1 labelina">@Mentions</label>
+								    <input type="text" name="mentions" class="inputFieldsmall" id="inputmentions" placeholder="Filtrer par mentions">
+								   
+							  </div>
+						
+							  <!-- Users -->
+							  <div class="form-group">
+								    <label for="users" class="col-sm-1 labelina">Utilisateurs</label>
+								    <input type="text" name="users" class="inputFieldsmall" id="inputusers" placeholder="Filtrer par utilisateurs">
+								    
+							  </div>
+							  
+							   <!-- Languages -->
+							  <div class="form-group">
+								    <label for="lang" class="col-sm-1 labelina">Langages</label>
+								    <input type="text" name="lang" class="inputFieldsmall" id="inputlang" placeholder="Filtrer par langage ex: fr;en">
+								    
+							  </div>
+						
+							  <!-- Retweets -->
+					 		  <div class="form-group">
+									<label  class="col-sm-1 labelina">Retweets</label> 
+										<div >	<label  class="labelina">   <input id="radio_rt" type="radio" name="retweet" value='-1' checked="checked" />Chercher dans tous les tweets</label> </div>
+										<div style="margin-left: 115px;">	<label  class="labelina">   <input id="radio_rt_0" type="radio" name="retweet" value="0"/>Exclure les tweets retweetés </label> </div>
+									<!-- 	<div style="margin-left: 115px;">	<label  class="labelina">	<input  id="radio_rt_1" type="radio" name="retweet" value="1" />Restreindre aux tweets retweetés</label></div>-->
+							  </div>
+							  
+							  <!-- quotes -->
+					 		  <div class="form-group" >
+									<label  class="col-sm-1 labelina">Citations</label> 
+			
+										<div >	<label  class="labelina">   <input  id="radio_qt" type="radio" name="quote" value='-1' checked="checked" />Chercher dans tous les tweets</label> </div>
+										<div style="margin-left: 115px;">	<label  class="labelina">   <input id="radio_qt_0" type="radio" name="quote" value="0"/>Exclure les tweets cités </label> </div>
+										<!--<div style="margin-left: 115px;">	<label  class="labelina">	<input id="radio_qt_1"  type="radio" name="quote" value="1" />Restreindre aux tweets cités</label></div>-->
+	
+							  </div>
+							  
+							  <!-- Source
+					 		  <div class="form-group" style="display:[[SOURCE_DISPLAY]];">
+									<label  class="col-sm-1 labelina">Sources</label> 
+										<div >	<label  class="labelina">   <input type="radio" name="source" value='-1' checked="checked" />Toutes les sources</label> </div>
+										<div style="margin-left: 115px;">	<label  class="labelina">   <input type="radio" name="source" value="0"/>Ina </label> </div>
+										<div style="margin-left: 115px;">	<label  class="labelina">	<input  type="radio" name="source" value="1" />Externe</label></div>
+							  </div> -->
+						
+					
+						</div>
+			</form>
+	</div>
+
+
+	
+	
+	<div id="container_timeline" class="labelina" style="width:98%;"></div>
+
+
+	<div class="banner" id="resultsbanner">
+		Recherche de tweets, veuillez préciser vos critéres de recherche.
+	</div>
+
+	
+<div id="content" style="min-height:300px;margin-left:30px; margin-right:20px;display:none;"  >
+		<div id="tabs">
+		    <ul>
+		     <!--	<li><a href="#tweets" data-toggle="tab" class="labelina">Tweets</a></li> -->
+		     	<li><a href="#tweets_list" data-toggle="tab" class="labelina">Liste</a></li>
+				<li><a href="#analytics" data-toggle="tab" class="labelina">Analyse</a></li>
+		        <li><a href="#dash" data-toggle="tab" class="labelina">Dashboard</a></li>
+			<!--	<li><a href="#textanalytics" data-toggle="tab" class="labelina">Nuage de mots</a></li> -->
+			<!--    <li style="display:[[EXPORT_DISPLAY]];"><a href="#iramuteq" data-toggle="tab" class="labelina">Export Iramuteq</a></li>
+				<li style="display:[[EXPORT_DISPLAY]];"><a href="#network" data-toggle="tab" class="labelina">Export Gexf</a></li>-->
+		    </ul>
+
+
+        			
+	
+
+
+	        <div  id="tweets_list">
+	        	<div id="colvis"></div>
+	            <table id='tweetsTable' class="cell-border table" style="border-collapse:collapse"></table>
+	
+	        </div>
+	        
+	        
+	      
+	        <div id="dash" >
+					
+					<div class="panel panel-info">
+								  <div class="panel-heading">
+									<h4 class="panel-title">
+									  <a data-toggle="collapse"  aria-expanded="true" class="collapsed" aria-controls="stats" href="#overall" >Stats</a>
+									</h4>
+								  </div>
+								
+								  	<div id = "stats" class="fixed-panel" style="overflow-y:auto; overflow-x:auto;height:90%">
+						
+										<div id="container_dashboard_retweet" class="col-md-5 labelina" style="min-width: 300px;display:block;"> </div>
+										<div id="container_dashboard_place" class="col-md-6 labelina" style=" min-width: 300px;display:block;"> </div>
+										
+										
+										<div id="container_dashboard_lang" class="col-md-5 labelina" style="min-width: 300px;display:block;"> </div>
+										<div id="container_dashboard_city" class="col-md-6 labelina" style=" min-width: 300px;display:block;"> </div>
+									</div>
+								 
+							</div>
+					
+		
+					<!--	<button class="btn btn-link labelina" id="hashtagsbutton" style="float: left;" onclick="dashboardClick('hashtags');">Top Hashtags </button>	
+					<button  class="btn btn-link labelina" id="mentionsbutton" style="float: left;" onclick="dashboardClick('mentions');">Top Mentions  </button>	
+					<button  class="btn btn-link labelina" id="urlsbutton" style="float: left;" onclick="dashboardClick('urls');">Top Liens</button>	
+					<button  class="btn btn-link labelina" id="usersbutton" style="float: left;" onclick="dashboardClick('users');">Top Utilisateurs </button>	-->
+				
+					<div id="accordion" role="tablist" aria-multiselectable="true">
+					
+							
+							<div class="panel panel-info">
+								  <div class="panel-heading">
+									<h4 class="panel-title">
+									  <a data-toggle="collapse" data-parent="#accordion" aria-expanded="false" class="collapsed" aria-controls="container_dashboard_hashtags" href="#overall"onclick="dashboardClick('hashtags','topdashboard');" >Top Hashtags</a>
+									</h4>
+								  </div>
+							  
+								  <div id="container_dashboard_hashtags" class="panel-collapse collapse fixed-panel labelina" style="overflow-y:hidden; overflow-x:hidden;height:60%"> </div>
+								  
+							</div>
+							
+							
+							
+							
+							<div class="panel panel-info">
+								  <div class="panel-heading">
+									<h4 class="panel-title">
+									  <a data-toggle="collapse" data-parent="#accordion" aria-expanded="false" class="collapsed" aria-controls="container_dashboard_mentions" href="#overall"onclick="dashboardClick('mentions','topdashboard');" >Top Mentions</a>
+									</h4>
+								  </div>
+							  
+								  <div id="container_dashboard_mentions" class="panel-collapse collapse fixed-panel labelina" style="overflow-y:hidden; overflow-x:hidden;height:60%"> </div>
+								  
+							</div>
+							<div class="panel panel-info" >
+								  <div class="panel-heading">
+									<h4 class="panel-title">
+									  <a data-toggle="collapse" data-parent="#accordion" aria-expanded="false" class="collapsed" aria-controls="container_dashboard_urls" href="#overall"onclick="dashboardClick('urls','topdashboard');" >Top Liens</a>
+									</h4>
+								  </div>
+							  
+								  <div id="container_dashboard_urls" class="panel-collapse collapse labelina" style="overflow-y:hidden; overflow-x:hidden;height:60%"> </div>
+								  
+							</div>
+							<!--
+							<div class="panel panel-info">
+								  <div class="panel-heading">
+									<h4 class="panel-title">
+									  <a data-toggle="collapse" data-parent="#accordion" aria-expanded="false" class="collapsed" aria-controls="container_dashboard_urls" href="#overall"onclick="dashboardClick('urls','topdashboard');" >Top Liens</a>
+									</h4>
+								  </div>
+							  
+								  <div id="container_dashboard_urls" class="panel-collapse collapse" style="height:100%;"> </div>
+								  
+							</div>-->
+							
+							<div class="panel panel-info">
+								  <div class="panel-heading">
+									<h4 class="panel-title">
+									  <a data-toggle="collapse" data-parent="#accordion" aria-expanded="false" class="collapsed" aria-controls="container_dashboard_users" href="#overall"onclick="dashboardClick('users','topdashboard');" >Top Utilisateurs</a>
+									</h4>
+								  </div>
+							  
+								  <div id="container_dashboard_users" class="panel-collapse collapse fixed-panel labelina" style="overflow-y:hidden; overflow-x:hidden;height:60%"> </div>
+								  
+							</div>
+							
+							<div class="panel panel-info">
+								  <div class="panel-heading">
+									<h4 class="panel-title">
+									  <a data-toggle="collapse" data-parent="#accordion" aria-expanded="false" class="collapsed" aria-controls="container_dashboard_media" href="#overall"onclick="dashboardClick('media','topdashboard');" >Top Media (image,video etc.)</a>
+									</h4>
+								  </div>
+							  
+								  <div id="container_dashboard_media"  class="panel-collapse collapse fixed-panel labelina" style="overflow-y:hidden; overflow-x:hidden;height:90%"> </div>
+				
+								  
+							</div>
+							
+							<div class="panel panel-info">
+								  <div class="panel-heading">
+									<h4 class="panel-title">
+									  <a data-toggle="collapse" data-parent="#accordion" aria-expanded="false" class="collapsed" aria-controls="container_dashboard_emojis" href="#overall"onclick="dashboardClick('emojis','topdashboard_emojis');" >Top Emojis</a>
+									</h4>
+								  </div>
+							  
+								  <div id="container_dashboard_emojis" class="panel-collapse collapse fixed-panel labelina" style="overflow-y:hidden; overflow-x:hidden;height:60%"> </div>
+								  
+							</div>
+					
+					
+					</div>
+			
+				
+	        
+	        </div>
+			
+		
+
+		        <div  id="analytics" >
+		            <div class="col-md-2"> 
+		            	 <!--<div class="btn-group">
+								<button type="button" class="btn btn-default labelina" id="submit_analyze_all" onclick="analyze()" >Analyser</button>
+						 </div>-->
+						 <br/>
+						 <br/>
+						    	<form id='analyticsform'   method="post">
+									<div class="form-group">
+										   
+										    
+										    <input type="text" name="analytics_keys" class="inputFieldxs" id="analytics_keys" style="height:35px;width:100%;margin-bottom: 5px !important;" required>
+				
+										    <select class="inputFieldxs"  name="analytics_type" style="height:35px;width:100%;margin-bottom: 5px !important;" required>
+										    	
+											    <option  value="Hashtag">Hashtag</option>
+											    <option  value="User">Utilisateur</option>
+											    <option  value="Mention">Mention</option>
+												<option  value="Url">Url</option>
+												<option  value="Texte">Texte</option>
+											</select>
+				
+											<button type="submit" class="btn btn-default labelina" id="submit_add_analyze" style="float: right;"><font color="#00BDD3">Ajouter </font></button>	
+									</div>											
+								</form>
+							
+								<br/>	
+								<hr>
+		  
+							  <div>
+							    
+							     <br/>	
+								 <button type="button"  class="btn btn-default labelina" id="button_analytics_delete_selected"><font color="red">Supprimer les séléctions </font></button>
+							  	 <table id='tableAnalytics' class="display table table-striped  dt-bootstrap">
+							  		<thead>
+							            <tr>
+							                <th class='labelina'>Liste à analyzer</th>
+							            
+							            </tr>
+							        </thead>
+							  	</table>
+							  </div>
+		
+					
+					</div>
+		             
+             
+          
+					<div class="col-md-9" id="analytics_panels">
+					  <div class="panel-group">
+					    <!--  over all panel   -->
+					    <div class="panel panel-info">
+					      <div class="panel-heading">
+					        <h4 class="panel-title">
+					          <a data-toggle="collapse" aria-expanded="true" href="#overall" >Timeline</a>
+					        </h4>
+					      </div>
+					      <div id="overall" class="panel-collapse" >
+					        <div id="container_timelines_overall" class="labelina"  style="height:100%;" ></div>
+					      </div>
+					    </div>
+					    <!--  one by one panel  
+					    <div class="panel panel-info">
+					      <div class="panel-heading">
+					        <h4 class="panel-title">
+					          <a data-toggle="collapse" href="#onebyone">Timeline un par un</a>
+					        </h4>
+					      </div>
+					      <div id="onebyone" class="panel-collapse">
+					        <div id="container_timelines_onebyone"  style="height:100%;"></div>
+					      </div>
+					    </div>-->
+					</div>
+			</div>
+             
+
+	
+	</div>
+<!--          			
+	<div id="textanalytics" >
+			<div  id="bannerwordcloud" class="labelina">
+					Attention : le nuage de mots est généré si la requête retourne moins de 80 000 000 résultats pour la version beta. Merci pour votre compréhension.
+				</div>
+				<br/><br/><br/>
+				
+				<div class="col-md-2"> 
+				
+				<form id='textform'   method="post">
+					 <div class="form-group">
+					 
+							    <textarea id="stopwords" style="resize:vertical;width: 250px;" rows="5" class="labelina" placeholder="La liste de mots d'arret separé par ;"></textarea>
+								<br/>	<br/>		
+							
+							    <select class="inputFieldxs" id="wordcloudsize"  name="wordcloudsize" style="height:35px;width:50%;margin-bottom: 5px !important;" required>
+							
+										
+											    <option   value=50>50 mots</option>
+											    <option   value=100>100 mots</option>
+												<option   value=100>250 mots</option>
+												<option   value=300>300 mots</option>
+												<option  selected="selected" value=500>500 mots</option>
+			
+								</select>		
+								<br/>	<br/>	
+							<button type="submit" class="btn btn-default labelina" id="wordcloud" style="float: left;"><font color="#00BDD3">Générer le nuage de mots </font></button>		
+					</div>
+				</form>
+				</div>
+				<div  class="col-md-9" id="texte_panels">
+					<button id="save" class="btn btn-default labelina" style="float: right;" onclick="svgToImage()">Exporter le nuage de mots</button>
+					<div id="svgdataurl"></div>
+
+					<div id='cloud'  ></div>
+					<div id ="loadingwordcount" class="col-md-5">
+						<table id='tableWordcount' class="display table table-striped  dt-bootstrap" >
+							<thead>
+								<tr>
+									<th class='labelina'>Mot</th>
+									<th class='labelina'>Nombre</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+			</div>
+-->
+			
+<!--
+			<div id="iramuteq" >
+				<form id='iramuteqform'   method="post">
+				    <label  class="labelina">Variables illustratives e.g. *var1_1 *var2_2</label> 
+					<hr/>
+					<div id="checkboxes">
+						<label class="labelina"> <input type="checkbox" name="id" value="id"/> Tweet Id </label><br />
+						<label class="labelina"> <input type="checkbox" name="date_yyyy_mm" value="date_yyyy_mm"/> Date de création YYYY_MM </label><br />
+						<label class="labelina"> <input type="checkbox" name="date_yyyy_mm_dd" value="date_yyyy_mm_dd"/> Date de création YYYY_MM_DD </label><br />
+						<label class="labelina"> <input type="checkbox" name="date_yyyy_mm_dd_hh" value="date_yyyy_mm_dd_hh"/> Date de création YYYY_MM_DD_HH </label><br />
+						<label class="labelina"> <input type="checkbox" name="date_yyyy_mm_dd_hh_mm" value="date_yyyy_mm_dd_hh_mm"/> Date de création YYYY_MM_DD_HH_MM </label><br />
+						<label class="labelina"> <input type="checkbox" name="user_id" value="user_id"/> Utilisateur  <br />  <br />
+					</div>
+					<label  class="labelina">Nettoyage du contenu</label> 
+					<hr/>
+					<div id="irasettings">
+						<label class="labelina"> <input type="checkbox" name="nohashtag" value="nohashtag"/> Retirer les hashtags</label><br />
+						<label class="labelina"> <input type="checkbox" name="nomention" value="nomention"/> Retirer les mentions </label><br />
+						<label class="labelina"> <input type="checkbox" name="nourl" value="nourl"/> Retirer les urls  </label><br />
+					</div> 
+					<br/>	<br/>
+					Attention : pour la version beta, 10 000 tweets sont utilisés. Si la requête retourne moins de 10 000 résultats, le fichier iramuteq est complet.
+					<br/>	<br/>
+					<button type="submit" class="btn btn-default labelina" id="irasubmit" style="float: left;"><font color="#00BDD3">Générer le fichier iramuteq </font></button>
+				</form>
+				
+				
+				
+			</div>
+			
+			
+	<div id="network" >
+				<label  class="labelina">
+				
+				Le graphe généré correspond à la requête et contient trois type de nœuds et 5 types de liens.
+				<br/><br/>
+				Un nœud représente :
+				<br/>
+
+				<li> utilisateur</li>
+				<li> hashtag</li>
+				<li> hôte (url)</li>
+				<br/><br/>
+				Un lien représente :
+				<br/>
+
+				<li> RT : retweet</li>
+				<li> QT: citation</li>
+				<li> Lien html vers un url (link) </li>
+				<li> Hashtag </li>
+				<li> Mention </li>
+
+				
+				</label> 
+				<br/><br/>
+				Attention : pour la version beta, 10 000 tweets sont utilisés. Si la requête retourne moins de 10 000 résultats, le graphe est complet.
+				
+				<br/><br/>
+				<button class="btn btn-default labelina" id="networkgraph" style="float: left;" onclick="generateNetworkGraph();"><font color="#00BDD3">Générer le graphe </font></button>	
+			</div>-->
+</div>
+
+	<div id="container_popup">
+	
+	</div>
+</div>
+</div>	
+
+</body>
+
+</html>

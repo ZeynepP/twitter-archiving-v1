@@ -1,0 +1,21 @@
+{
+	"twitter" : [
+			{
+				"CONSUMER_KEY" : "xxx",
+				"CONSUMER_SECRET": "yyy",
+				"OAUTH_TOKEN" : "zzz",
+				"OAUTH_TOKEN_SECRET" : "ttt",
+				"OWNER" : "temp"
+			},
+			{
+				"CONSUMER_KEY" : "xxx",
+				"CONSUMER_SECRET": "yyy",
+				"OAUTH_TOKEN" : "zzz",
+				"OAUTH_TOKEN_SECRET" : "ttt",
+				"OWNER" : "temp2"
+			}
+			
+	
+		]
+
+}

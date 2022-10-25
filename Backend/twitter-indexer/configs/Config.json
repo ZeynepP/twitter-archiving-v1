@@ -1,0 +1,34 @@
+{
+	"elastic":
+	{
+		"host" : ["http://xxxx02.ina.fr:xx", "http://xxxx03.ina.fr:xx", "http://xxxx04.ina.fr:xx", "http://xxxx05.ina.fr:xx"],
+		"id_field":"id",
+		"index_name" : "twitter_test",
+		"index_type_name" : "tweets",
+		"index_schema" : "Z://eclipse-workspace//twitter-indexer//configs//es_schema//Twitterindex.json",
+		"index_settings" :  "Z://eclipse-workspace//twitter-indexer//configs//es_schema//Twitterindex_settings15.json",
+		"auto_create_index" : "true",
+		"max_record_count":1000
+	},
+	
+	"data":
+	{
+		"twitter_data" : "file:///D://Documents//test//search",
+		"offset_file" : "C://Users//zpehlivan//DataTwitter//twitter_test.offset",
+		"limit_file":"C://Users//zpehlivan//DataTwitter//",
+		"urls_file": "C://Users//zpehlivan//DataTwitter//"
+	},
+	
+	
+	"settings": 
+	{
+		"url_unshorten" :"false",
+		"application_name" : "twitter_test_index",
+		"proxy_host":"firewall.ina.fr",
+		"proxy_port":"81",
+		"delim" : ";"	
+	}
+	
+
+
+}

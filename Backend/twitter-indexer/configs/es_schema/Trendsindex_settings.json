@@ -1,0 +1,38 @@
+{
+	"settings" : {
+		"index" : {
+			
+			"number_of_shards" : 1,
+			"number_of_replicas" : 0, 
+			"mapping.allow_type_wrapper": false,
+			"index.mapping.coerce": true,
+			"analysis" : {
+				"filter" : {
+					"elision" : {
+						"type" : "elision",
+						"articles" : ["l", "m", "t", "qu", "n", "s", "j", "d", "c"]
+					}
+				},
+				
+				"filter" : {
+					"length" : {
+						"type" : "length",
+						"min" : 1,
+						"max" : 100
+					}
+				},
+				
+				"analyzer" : {
+					"text_fr" : {
+						"type" : "custom",
+						"tokenizer" : "standard",
+						"filter" : ["length", "asciifolding", "lowercase", "elision"]
+					},
+					"whitespace" : {
+						"type" : "whitespace"
+					}
+				}
+			}
+		}
+	}
+}

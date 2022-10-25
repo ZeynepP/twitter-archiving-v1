@@ -1,0 +1,31 @@
+{
+	"trends" : {
+		"_source" : {"enabled" : true,"compress" : true},
+		"_all" : {"enabled" : false},
+		"_timestamp" : {"enabled" : true},
+		
+		"dynamic" : "strict",
+		
+		
+	"properties":{
+	
+		 "id":  {"type" : "string", "index" : "not_analyzed", "store" : "no"},
+		  "source_path" :  {"type" : "string", "index" : "not_analyzed", "store" : "no", "fielddata" : {"format" : "doc_values"}},
+		 
+		  "archived_at": {"type" : "long", "store" : "no", "fielddata" : {"format" : "doc_values"}},
+		  "indexed_at": {"type" : "long", "store" : "no", "fielddata" : {"format" : "doc_values"}},
+		  
+		  "date_trend": {"type" : "date", "format": "date_time_no_millis", "store" : "no", "fielddata" : {"format" : "doc_values"}},
+	      "as_of":  {"type" : "string","index" : "not_analyzed", "store" : "no", "fielddata" : {"format" : "doc_values"}},
+	      "name": {"type" : "string", "store" : "no","index" : "not_analyzed", "fielddata" : {"format" : "doc_values"}},
+	      "query": {"type" : "string", "store" : "no", "index" : "not_analyzed","fielddata" : {"format" : "doc_values"}}, 
+	      "promoted_content": {"type" : "boolean", "store" : "no", "null_value" : "false", "fielddata" : {"format" : "doc_values"}},
+	      "url": {"type" : "string", "store" : "no", "index" : "not_analyzed","fielddata" : {"format" : "doc_values"}}, 
+	      "tweet_volume":{"type" : "integer", "index" : "not_analyzed", "store" : "no","null_value" : 0}, 
+		  "rank":{"type" : "integer", "index" : "not_analyzed", "store" : "no","null_value" : 0}
+
+	
+     }
+	
+  }
+}
